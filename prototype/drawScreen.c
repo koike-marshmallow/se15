@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <string.h>
+#include "matrix.h"
 #include "drawScreen.h"
 
 void rs_initscr(void);
@@ -78,7 +79,7 @@ void drawMatrix(int pos_y, int pos_x, MATRIX *matrix){
 	
 	for( i=pos_y; i < (pos_y + matrix->size_y); i++){
 		for( j=pos_x; j < (pos_x + matrix->size_x); j++){
-			if( *dp != NDRW ){
+			if( *dp != MC_NONE ){
 				mvaddch(i, j, *dp);
 			}
 			dp++;

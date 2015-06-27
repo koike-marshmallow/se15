@@ -14,6 +14,11 @@ test_gameScreen : test_gameScreen.o gameScreen.o drawScreen.o
 test_gameScreen.o : test_gameScreen.c drawScreen.h gameScreen.h
 	cc -c test_gameScreen.c
 #
+test_matrix : test_matrix.o matrix.o drawScreen.o 
+	cc -o test_matrix test_matrix.o matrix.o drawScreen.o -lncurses
+test_matrix.o : test_matrix.c matrix.h drawScreen.h
+	cc -c test_matrix.c
+#
 #modules
 drawScreen.o : drawScreen.c drawScreen.h
 	cc -c drawScreen.c
@@ -21,3 +26,5 @@ highScore.o : highScore.c highScore.h
 	cc -c highScore.c
 gameScreen.o : gameScreen.c gameScreen.h drawScreen.h
 	cc -c gameScreen.c
+matrix.o : matrix.c matrix.h
+	cc -c matrix.c

@@ -2,6 +2,7 @@
 #define FORMAT_RIGHT  4102
 #define FORMAT_CENTER 4103
 
+/* これらの内容は matrix に分割されました
 #define SP_B ' '|COLOR_PAIR(COLOR_BLACK)
 #define SP_W ' '|COLOR_PAIR(COLOR_WHITE)
 #define NDRW 4201
@@ -12,7 +13,7 @@ struct matrix {
 	int size_x;
 };
 typedef struct matrix MATRIX;
-
+*/
 
 void rs_initscr(void);
 void rs_endwin(void);
