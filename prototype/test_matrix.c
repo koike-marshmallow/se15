@@ -2,10 +2,14 @@
 #include "matrix.h"
 #include "drawScreen.h"
 
-int main(void){
+int main(int argc, char *argv[]){
 	MATRIX *mat;
 	
-	mat = loadMatrix("test.mat");
+	if( argc < 2 ){
+		mat = loadMatrix("test.mat");
+	}else{
+		mat = loadMatrix(argv[1]);
+	}
 	if( mat == NULL ){
 		fprintf(stderr, "test_matrix: return NULL\n");
 		return 1;

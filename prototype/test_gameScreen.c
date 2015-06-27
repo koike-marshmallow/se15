@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
+#include "matrix.h"
 #include "drawScreen.h"
 #include "gameScreen.h"
 
