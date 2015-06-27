@@ -3,16 +3,19 @@
 #include <ncurses.h>
 #include "matrix.h"
 
-#define CONVERT_TABLE_SIZE 4
+#define CONVERT_TABLE_SIZE 7
 
 char CONVERT_TABLE_INPUT[CONVERT_TABLE_SIZE] = {
-	'0', '1', '`', '~'
+	'0', '1', '`', '~', 'x', 'o', '_'
 };
 int CONVERT_TABLE_CHAR[CONVERT_TABLE_SIZE] = {
 	MC_NONE,
 	' ' | COLOR_PAIR(COLOR_WHITE),
 	'`' | COLOR_PAIR(COLOR_WHITE),
-	'~' | COLOR_PAIR(COLOR_WHITE)
+	'~' | COLOR_PAIR(COLOR_WHITE),
+	'x' | COLOR_PAIR(COLOR_WHITE),
+	'o' | COLOR_PAIR(COLOR_WHITE),
+	'_' | COLOR_PAIR(COLOR_WHITE)
 };
 
 

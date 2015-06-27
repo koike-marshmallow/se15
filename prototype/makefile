@@ -9,8 +9,8 @@ test_highScore : test_highScore.o highScore.o
 test_highScore.o : test_highScore.c highScore.h
 	cc -c test_highScore.c
 #
-test_gameScreen : test_gameScreen.o gameScreen.o drawScreen.o game_drawScreen.o game_field.o matrix.o
-	cc -o test_gameScreen test_gameScreen.o gameScreen.o drawScreen.o game_drawScreen.o game_field.o matrix.o -lncurses
+test_gameScreen : test_gameScreen.o gameScreen.o drawScreen.o game_drawScreen.o game_field.o matrix.o game_obstacle.o game_jumping.o game_bump.o
+	cc -o test_gameScreen test_gameScreen.o gameScreen.o drawScreen.o game_drawScreen.o game_field.o matrix.o game_obstacle.o game_jumping.o game_bump.o -lncurses
 test_gameScreen.o : test_gameScreen.c drawScreen.h gameScreen.h
 	cc -c test_gameScreen.c
 #
@@ -30,5 +30,11 @@ game_drawScreen.o : game_drawScreen.c game_field.h drawScreen.h game_drawScreen.
 	cc -c game_drawScreen.c
 game_field.o : game_field.c game_field.h matrix.h
 	cc -c game_field.c
+game_obstacle.o : game_obstacle.c game_obstacle.h game_field.h matrix.h
+	cc -c game_obstacle.c
+game_jumping.o : game_jumping.c gameScreen.h
+	cc -c game_jumping.c
+game_bump.o : game_bump.c matrix.h gameScreen.h game_field.h game_jumping.h
+	cc -c game_bump.c
 matrix.o : matrix.c matrix.h
 	cc -c matrix.c

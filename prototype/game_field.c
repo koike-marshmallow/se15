@@ -16,8 +16,9 @@ void initField(void){
 void shiftField(void){
 	int i;
 	
-	for( i=0; i<FIELD_WIDTH; i++){
-		FIELD[i] = NULL;
+	for( i=0; i<FIELD_WIDTH - 1; i++){
+		FIELD[i] = FIELD[i + 1];
 	}
+	FIELD[FIELD_WIDTH - 1] = NULL;
 }
 	

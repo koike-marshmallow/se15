@@ -3,9 +3,9 @@
 
 #define PLAYER_POS_X 6
 
+/* game_drawScreen用 */
 extern int SCORE;
 extern int SCORE_HIGH;
-
 extern int PLAYER_JHEIGHT;
 extern MATRIX *PLAYER_MATRIX;
 
