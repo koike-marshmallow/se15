@@ -67,6 +67,10 @@ void drawMatrix(int pos_y, int pos_x, MATRIX *matrix){
 	int i, j;
 	int max_y, max_x;
 	
+	if( matrix == NULL ){
+		return;
+	}
+	
 	getmaxyx(stdscr, max_y, max_x);
 	if( pos_y + (matrix->size_y-1) >= max_y ){
 		return;

@@ -3,15 +3,18 @@
 #include <ncurses.h>
 #include "matrix.h"
 
-#define CONVERT_TABLE_SIZE 2
+#define CONVERT_TABLE_SIZE 4
 
 char CONVERT_TABLE_INPUT[CONVERT_TABLE_SIZE] = {
-	'0', '1'
+	'0', '1', '`', '~'
 };
 int CONVERT_TABLE_CHAR[CONVERT_TABLE_SIZE] = {
 	MC_NONE,
-	' ' | COLOR_PAIR(COLOR_WHITE)
+	' ' | COLOR_PAIR(COLOR_WHITE),
+	'`' | COLOR_PAIR(COLOR_WHITE),
+	'~' | COLOR_PAIR(COLOR_WHITE)
 };
+
 
 int searchConvertTable(char c){
 	int i;
