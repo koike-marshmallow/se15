@@ -1,0 +1,10 @@
+#testers
+test_drawScreen : test_drawScreen.o drawScreen.o
+	cc -o drawScreen test_drawScreen.o drawScreen.o -lncurses
+test_drawScreen.o : test_drawScreen.c drawScreen.h
+	cc -c test_drawScreen.c
+#
+#
+#modules
+drawScreen.o : drawScreen.c drawScreen.h
+	cc -c drawScreen.c

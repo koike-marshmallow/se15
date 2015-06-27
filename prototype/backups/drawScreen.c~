@@ -1,0 +1,101 @@
+#include <ncurses.h>
+#include <string.h>
+#include "drawScreen.h"
+
+void rs_initscr(void);
+void rs_endwin(void);
+void drawString(int pos_x, int pos_y, char *str, int format);
+void drawMatrix(int pos_x, int pos_y, MATRIX *matrix);
+void drawBox(int pos_x, int pos_y, int width, int height);
+
+void rs_initscr(void){
+	
+	/* 画面の初期化処理 */
+	initscr();
+	start_color();
+	
+	/* カラーペアの初期化 */
+	init_pair(COLOR_WHITE, COLOR_BLACK, COLOR_WHITE);
+	
+	/* 入力処理の初期化設定 */
+	keypad(stdscr, TRUE);
+	crmode();
+	noecho();
+	curs_set(0);
+	
+	return;
+}
+
+
+void rs_endwin(void){
+	
+	/* 画面の終了処理 */
+	endwin();
+	
+	return;
+}
+
+
+void drawString(int pos_y, int pos_x, char *str, int format){
+	int x, len;
+	
+	len = strlen(str);
+	mvprintw(0, 0, "%d", len);
+	
+	switch( format ){
+		case FORMAT_LEFT:
+			x = pos_x;
+			break;
+		case FORMAT_RIGHT:
+			x = pos_x - len;
+			break;
+		case FORMAT_CENTER:
+			x = pos_x - (len / 2);
+			break;
+		default:
+			return;
+	}
+	
+	mvprintw(pos_y, x, str);
+	
+	return;
+}
+
+
+void drawMatrix(int pos_y, int pos_x, MATRIX *matrix){
+	int *dp;
+	int i, j;
+	
+	dp = matrix->dots;
+	
+	for( i=pos_y; i < (pos_x + matrix->size_y); i++){
+		for( j=pos_x; j < (pos_y + matrix->size_x); j++){
+			mvaddch(i, j, *dp);
+			dp++;
+		}
+	}
+	
+	return;
+}
+
+
+void drawBox(int pos_y, int pos_x, int height, int width){
+	int i;
+	
+	mvaddch(pos_y         , pos_x        , ACS_ULCORNER);
+	mvaddch(pos_y         , pos_x + width, ACS_URCORNER);
+	mvaddch(pos_y + height, pos_x        , ACS_LLCORNER);
+	mvaddch(pos_y + height, pos_x + width, ACS_LRCORNER);
+	
+	for( i=pos_x + 1; i < pos_x+width; i++){
+		mvaddch(pos_y, i, ACS_HLINE);
+		mvaddch(pos_y + height, i, ACS_HLINE);
+	}
+	for( i=pos_y + 1; i < pos_y+height; i++){
+		mvaddch(i, pos_x, ACS_VLINE);
+		mvaddch(i, pos_x + width, ACS_VLINE);
+	}
+	
+	return;
+}
+

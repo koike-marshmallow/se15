@@ -1,0 +1,49 @@
+#define FORMAT_LEFT   4101
+#define FORMAT_RIGHT  4102
+#define FORMAT_CENTER 4103
+
+#define SP_B ' '|COLOR_PAIR(COLOR_BLACK)
+#define SP_W ' '|COLOR_PAIR(COLOR_WHITE)
+#define NDRW 4201
+
+struct matrix {
+	int *dots;
+	int size_y;
+	int size_x;
+};
+typedef struct matrix MATRIX;
+
+
+void rs_initscr(void);
+void rs_endwin(void);
+void drawString(int pos_y, int pos_x, char *str, int format);
+void drawMatrix(int pos_y, int pos_x, MATRIX *matrix);
+void drawBox(int pos_y, int pos_x, int width, int height);
+void drawGround(int y, int x, int width);
+
+劇場で前売券を買うと
+ﾓｽｷﾞｺ君がもらえるぞ
+ｺﾞﾙｧ!
+　　 r"⌒｡⌒ヽ
+　　ｉ　　ｧ王)ｧ
+　　 ゝ_(ﾟДﾟ)
+　　 {_(ノ三|つ
+ﾄｰ,ｰ,{__ﾐ三ﾉﾐ
+(_(_(＿ﾉ∪∪
+
+
+がしゃーん
+　　　　　がしゃーん
+　 ＿＿＿＿＿＿
+　| ∥⊂⊃⊂⊃∥
+　| ∥ ﾛﾛﾛﾛﾛﾛ ∥
+　| ∥ ･･････ ∥
+　| ∥ ﾛﾛﾛﾛﾛﾛ ∥
+　| ∥Ｃoca Θ∥
+　| ∥口口口□∥
+　|ﾐ∥＝＝＝＝∥
+　　 ￣￣￣￣￣
+自動販売機だよ
+自動で販売してくれる
+凄いやつだよ
+

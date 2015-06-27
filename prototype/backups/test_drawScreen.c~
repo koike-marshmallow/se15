@@ -1,0 +1,36 @@
+#include "drawScreen.h"
+#include <ncurses.h>
+#include <unistd.h>
+
+int TEST_MATRIX_PATTERN[] = {
+	SP_B, SP_B, SP_B, SP_B, SP_W, 'o' , SP_W, SP_W,
+	SP_W, SP_W, SP_W, SP_W, SP_W, SP_W, SP_W, SP_W, 
+	SP_B, SP_W, SP_W, SP_W, SP_W, SP_B, SP_B, SP_B,
+	SP_B, SP_W, SP_B, SP_B, SP_W, SP_B, SP_B, SP_B
+
+};
+
+MATRIX TEST_MATRIX = {TEST_MATRIX_PATTERN, 4, 8};
+	
+	
+	 
+	 
+
+
+int main(void){
+	
+	rs_initscr();
+	drawBox(2, 2, 10, 30);
+	drawString(3, 15, "lefting", FORMAT_LEFT);
+	drawString(4, 15, "righting", FORMAT_RIGHT);
+	drawString(5, 15, "centering", FORMAT_CENTER);
+	drawMatrix(2, 2, &TEST_MATRIX);
+	
+	refresh();
+
+	sleep(3);
+
+	rs_endwin();
+	
+	return 0;
+}

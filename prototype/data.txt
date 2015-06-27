@@ -1,0 +1,411 @@
+!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="ja" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <title>
+    
+    
+      大阪工業大学ポータルサイト
+    
+    </title>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="share/css/base.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="share/css/noneMainBar.css" type="text/css" charset="utf-8" />
+<link href="share/css/index.css" rel="stylesheet" type="text/css" media="all" />
+<link href="share/css/import.css" rel="stylesheet" type="text/css" media="all" />
+
+
+<body>
+
+	<script type="text/javascript" src="share/js/jquery.js"></script>
+	<script type="text/javascript" src="share/js/yuga.js"></script>
+	<script type="text/javascript" src="share/js/library.js"></script>
+	<script type="text/javascript" src="share/js/heightLine.js"></script>
+	<script type="text/javascript" src="share/js/swfTagWriter.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="js/jquery.qtip.js"></script>
+	<script language="JavaScript">
+<!--
+  function submitLoginForm(act){
+    document.loginForm.action = act;
+    document.loginForm.submit();
+  }
+
+//-->
+</script>
+
+
+	<!-- ヘッダー +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<div id="header">
+		<div class="area">
+
+			<div id="Logo">
+				<h1><a href="index.html"><img src="share/img/logo_01.gif" alt="大阪工業大学&#10;学内ポータルサイト" width="284" height="48" /></a></h1>
+			</div>
+
+			<div id="RightBox">
+				<h2><a href="http://www.oit.ac.jp/" target="_blank"><img src="share/img/logo_02.gif" alt="常翔学園&#10;大阪工業大学" width="136" height="33" /></a></h2>
+
+
+			</div>
+
+		</div>
+	</div>
+	<!-- /ヘッダー +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+	<div id="wrapper">
+	<div id="contents">
+
+	<!-- メインコンテンツ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+		<!-- ***** レフトカラム ***** -->
+		<div id="LeftColumn">
+
+		<a name="PageTop" id="PageTop"><!----></a>
+
+			<!-- ログイン -->
+			<h3><img src="share/img/tit_login.gif" width="212" height="57" alt="ログイン&#10;休講・補講情報、メッセージ等はこちら" /></h3>
+			<div class="login">
+				<div class="inner">
+					<!-- 環境ごとのアプリ名 -->
+					<form method="post" action="/CAMJWEB/login.do">
+						<input type="hidden" name="buttonName" value="">
+		    			<input type="hidden" name="lang" value="1">
+						<div id="loginmain">
+							<div id="login">
+								<p>ユーザーID</p>
+								<input type="text" name="userId" id="userId" class="formType01" />
+								<p>パスワード</p>
+								<input type="password" name="password" id="password" class="formType01" />
+								<p class="txtRight"><input type="image" name="login" id="loginButton" onclick="return exec('button.login_asdBlockId_3_blockId_2',this,null)" src="share/img/btn_login.gif" alt="login" /></p>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+	
+	
+							<div id="massage">
+								<div class="text">
+									
+								    
+
+
+
+
+    
+    
+
+								</div>
+							</div>
+			<!-- /ログイン -->
+
+			<!-- メニュー -->
+			<h3><img src="share/img/tit_menu.gif" width="212" height="82" alt="メニュー" /></h3>
+			<div id="menu">
+				<ul>
+					<li><div class="icon_01"><a href="http://o365.oit.ac.jp/" target="_blank">Web-mail</a></div></li>
+					<li><div class="icon_02"><a href="http://www.oit.ac.jp/japanese/center/docs/OWA_manual.pdf" target="_blank">Web-mail<br />
+					操作マニュアル</a></div></li>
+					<li><div class="icon_03"><a href="http://www.oit.ac.jp/japanese/center/portal/portalmanual-stu.pdf" target="_blank">ポータル<br />操作マニュアル学生用</a></div></li>
+					<li><div class="icon_07"><a href="http://www.oit.ac.jp/japanese/center/portal/share/pdf/password_henkou.pdf" target="_blank">パスワード変更方法</a></div></li>
+					<li><div class="icon_08"><a href="http://www.oit.ac.jp/japanese/center/portal/share/pdf/Anyconnect-VPN.pdf" target="_blank">学外から学内ネット<br />
+					ワークを利用する方法<br />
+					＜VPN＞</a></div></li>
+					<li class="end"><div class="icon_09"><a href="https://vpn.center.oit.ac.jp" target="_blank">VPN</a></div></li>
+				</ul>
+
+				<h4><img src="share/img/tit_vpn.gif" width="212" height="31" alt="学内およびVPN経由のみ" /></h4>
+				<ul>
+					<li><div class="icon_04"><a href="http://shuseki.oit.ac.jp/" target="_blank">出欠管理システム</a></div></li>
+					<li><div class="icon_05"><a href="http://elearn.oit.ac.jp/" target="_blank">Moodle(eラーニング)</a></div></li>
+					<li class="end"><div class="icon_06"><a href="http://lss.oit.ac.jp/index.html" target="_blank">学習支援サイト</a></div></li>
+				</ul>
+			</div>
+			<!-- /メニュー -->
+
+
+			<!-- バナー -->
+			<div id="banner">
+				<ul>
+					<li class="techmi">
+						<!--
+						<script type="text/javascript">
+							//<![CDATA[
+							var swf = new jp.catalase.SwfTagWriterTechmi('http://www.oit.ac.jp/japanese/center/portal/share/swf/bnr_techmi.swf', 'bannerswf', 208, 100);
+							swf.setRequiredVersion(9,0,15,0);
+							swf.setLoop(true);
+							swf.addParam('bgcolor', 'FFFFFF');
+							swf.writeHTML();
+							//]]>
+						</script>
+						<noscript><a href="http://www.oit.ac.jp/japanese/kohoblog/" target="_blank"><img src="share/img/bnr_techmi.gif" alt="テクミのブログ" width="208" height="100" /></a></noscript>
+						-->
+						<a href="http://www.oit.ac.jp/japanese/kohoblog/" target="_blank"><img src="share/img/bnr_techmi.gif" alt="テクミのブログ" width="208" height="100" /></a>
+					</li>
+
+					<li class="techmi"><a href="http://www.oit.ac.jp/japanese/club/" target="_blank"><img src="share/img/bnr_club.gif" width="208" height="100" alt="クラブ・サークル特設サイト" /></a></li>
+					<li class="end"><a href="https://www.portal.oit.ac.jp/k/" target="_blank"><img src="share/img/bnr_mobile.gif" width="212" height="176" alt="大阪工業大学ポータル&#10;https://www.portal.oit.ac.jp/k/" /></a></li>
+				</ul>
+			</div>
+			<!-- /バナー -->
+
+		</div>
+		<!-- ***** //レフトカラム ***** -->
+
+
+
+		<!-- ***** メイン内容 ***** -->
+		<div id="main">
+
+			<!-- 大工大最新ニュース ===========-->
+			<h3><img src="share/img/tit_news.gif" width="628" height="37" alt="工大最新ニュース" /></h3>
+			<div class="news">
+				<div class="inner">
+					<div class="inforArea">
+						<iframe src="https://www.oit.ac.jp/japanese/news/latest.php?type=2" width="604" height="255" frameborder="0" align="top" style="margin:0px;" title="INFORMATION">この部分はインラインフレームを使用しています。</iframe>
+					</div>
+
+					<!-- ポータルシステムからのお知らせ -->
+					<h3><img src="share/img/tit_portal_news.gif" width="604" height="30" alt="ポータルシステムからのお知らせ" /></h3>
+					<div class="portalNews">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th class="bg01">タイトル</th>
+								<td class="bg01">内　　容</td>
+							</tr>
+							<tr>
+								<th>【セキュリティの警告】について</th>
+								<td>httpsでポータルサイトにアクセスすると、「セキュリティで保護されたWebページコンテンツのみを表示しますか？」と警告メッセージが表示されます。ウェザーニュースやYahooトピックスなどをこのトップ画面に表示するためには、【いいえ】を選択してください。<br />詳しくは、<a href="http://www.oit.ac.jp/japanese/center/portal/share/pdf/security.pdf" target="_blank" class="pdf01">こちら</a></td>
+							</tr>
+							<tr>
+								<th class="bg02">携帯電話での<br />表示について</th>
+								<td class="bg02">携帯電話の機種によっては、一部表示が乱れたり、使用できない場合があります。</td>
+							</tr>
+						</table>
+					</div>
+					<!-- ポータルシステムからのお知らせ -->
+
+				</div>
+			</div>
+			<!-- /大工大最新ニュース ===========-->
+
+
+			<!-- 全学共通コンテンツ・学部別コンテンツ ===========-->
+			<div class="contents">
+				<div class="inner">
+					<div class="styleBox_01">
+						<div class="styleBox_02 cbox">
+
+							<div class="leftArea">
+								<h4>全学共通コンテンツ</h4>
+								<div class="cbox">
+									<ul class="left">
+										<li><a href="http://www.oit.ac.jp/japanese/students/time_table.html" target="_blank"><img src="share/img/icon_jikanwari.gif" width="98" height="97" alt="授業時間割" /></a></li>
+										<li><a href="http://josho-shikaku.jp/oit/" target="_blank"><img src="share/img/icon_kouza.gif" width="98" height="97" alt="エクステンション講座" /></a></li>
+										<li class="end"><a href="http://www.oit.ac.jp/japanese/center/index.html" target="_blank"><img src="share/img/icon_center.gif" width="98" height="97" alt="情報センター" /></a></li>
+									</ul>
+									<ul class="right">
+										<li><a href="http://www.oit.ac.jp/japanese/syllabus/index.html" target="_blank"><img src="share/img/icon_syllabus.gif" width="98" height="97" alt="webシラバス" /></a></li>
+										<li class="end"><a href="http://opac.lib.oit.ac.jp/webopac/topmnu.do" target="_blank"><img src="share/img/icon_zosyo.gif" width="98" height="97" alt="蔵書検索" /></a></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="rightArea">
+								<h4>学部別コンテンツ</h4>
+								<dl class="cbox">
+									<dt><span class="bg_blue heightLine-group1">工学部/大学院</span></dt>
+									<dd class="heightLine-group1">
+										<ul class="blueList">
+											<li><a href="http://www.oit.ac.jp/japanese/center/inside/portal/share/pdf/info_manual.pdf" target="_blank" class="pdf01">基礎情報処理Ｉ補助資料［学内のみ］</a></li>
+											<li><a href="http://www.oit.ac.jp/japanese/center/portal/share/pdf/gyouji-kou.pdf" target="_blank" class="pdf01">行事日程表（PDF）</a></li>
+											<li><a href="http://www.oit.ac.jp/japanese/academic/eng/" target="_blank">工学部Webサイト</a></li>
+										</ul>
+									</dd>
+								</dl>
+								<dl class="cbox">
+									<dt><span class="bg_green heightLine-group2">情報科学部/<br />
+									大学院</span></dt>
+									<dd class="heightLine-group2">
+										<ul class="greenList">
+											<li><a href="http://www.info.oit.ac.jp/jimu/kyoumuHP/kyoumindex.html" target="_blank">教務情報［学内のみ］</a></li>
+											<li><a href="http://www.info.oit.ac.jp/jimu/gakuseiHP/gakuindex.html" target="_blank">学生生活情報［学内のみ］</a></li>
+											<li><a href="http://www.info.oit.ac.jp/jimu/syusyoku/index.html" target="_blank">進路情報［学内のみ］</a></li>
+											<li><a href="http://www.oit.ac.jp/japanese/center/portal/share/pdf/gyouji-jou.pdf" target="_blank" class="pdf01">行事日程表（PDF）</a></li>
+											<li><a href="http://www.is.oit.ac.jp/" target="_blank">情報科学部Webサイト</a></li>
+										</ul>
+									</dd>
+								</dl>
+								<dl class="cbox">
+									<dt><span class="bg_yellow heightLine-group3">知的財産学部</span></dt>
+									<dd class="heightLine-group3">
+										<ul class="yellowList">
+											<li><a href="http://www.oit.ac.jp/japanese/center/portal/share/pdf/gyouji-tizai-bu.pdf" target="_blank" class="pdf01">行事日程表（PDF）</a></li>
+											<li><a href="http://www.oit.ac.jp/ip/" target="_blank">知的財産学部Webサイト</a></li>
+										</ul>
+									</dd>
+								</dl>
+								<dl class="cbox end">
+									<dt><span class="bg_pink heightLine-group4">専門職大学院<br />
+									知的財産研究科</span></dt>
+									<dd class="heightLine-group4">
+										<ul class="pinkList">
+											<li><a href="http://www.oit.ac.jp/japanese/center/portal/share/pdf/gyouji-tizai-in.pdf" target="_blank" class="pdf01">行事日程表（PDF）</a></li>
+											<li><a href="http://www.oit.ac.jp/ip/" target="_blank">知的財産研究科Webサイト</a></li>
+										</ul>
+									</dd>
+								</dl>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /全学共通コンテンツ・学部別コンテンツ ===========-->
+
+
+
+
+		</div>
+		<!-- ***** //メイン内容 ***** -->
+
+
+
+		<!-- ***** ライトカラム ***** -->
+		<div id="rightColumn">
+
+			<!-- 講習会参加申し込み -->
+			<div id="banner">
+				<ul>
+					<li class="techmi">
+						<a href="http://lss.oit.ac.jp/~center/" target="_blank">
+							<img src="http://www.oit.ac.jp/japanese/center/images/bnr_kousyukai.jpg">
+						</a>
+					<li>
+				</ul>
+			</div>
+			<br>
+
+			<!-- 安否確認システム -->
+			<div id="banner">
+				<ul>
+					<li class="techmi">
+						<a href="http://anpi.ac/oit/s/" target="_blank">
+							<img src="http://www.oit.ac.jp/japanese/center/images/anpiac.gif">
+						</a>
+					<li>
+				</ul>
+			</div>
+			<br>
+
+			<!-- ウェザーニュース  -->
+			<div class="weather">
+				<div id="weathernews_blog_parts"></div><script type="text/javascript">document.write('<scr' + 'ipt type="text/javascript" src="http://weathernews.jp/blog/js/blog.js?' + (new Date().valueOf()) + '"></scr' + 'ipt>');</script><script type="text/javascript">// <![CDATA[
+	wni_blog('blog/forecast:centeredOn=54',150,54,false);// ]]></script>
+			</div>
+			<!-- /ウェザーニュース -->
+
+
+			<!-- /yahooニュース -->
+			<div class="yahoo">
+			<script>var CFLwidth = "150";var CFLheight = "208";var CFLswfuri = "http://i.yimg.jp/i/topics/blogparts/topics_s.swf?genre=top&amp;wakuFontColor=FFFFFF&amp;wakuBGColor=68ccff&amp;bodyFontColor=393bfe&amp;bodyBGColor=FFFFFF";</script><script type="text/javascript" charset="euc-jp" src="http://public.news.yahoo.co.jp/blogparts/js/topics.js"></script>
+			</div>
+			<!-- /yahooニュース -->
+
+
+			<!-- TOEIC -->
+			<div class="toeic">
+				<script type="text/javascript" src="http://www.kkgs.net/toeic/bp/01/toeic.js"></script><br />-<a href="http://www.kkgs.net/toeic/" target="_blank" style="text-decoration:none;">TOEIC英単語</a>-
+			</div>
+			<!-- /TOEIC -->
+
+
+			<!-- 検索 ======================-->
+			<div class="serch">
+				<div class="inner">
+
+					<!-- フォーム -->
+					<div class="searchForm">
+						<form method="get" action="http://www.google.co.jp/search" target="_blank">
+
+							<p><input type="text" name="q" size="30" maxlength="255" value="" class="formType02" /></p>
+							<input type="hidden" name="ie" value="UTF-8" />
+							<input type="hidden" name="oe" value="UTF-8" />
+							<input type="hidden" name="hl" value="ja" />
+							<p class="txtRight"><input type="image" name="btnG" src="share/img/btn_search.gif" value="Google 検索" alt="検索" /></p>
+
+						</form>
+					</div>
+					<!-- フォーム -->
+
+				</div>
+			</div>
+			<!-- /検索 ======================-->
+
+
+		</div>
+		<!-- ***** //ライトカラム ***** -->
+
+
+
+	<!-- /メインコンテンツ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+	</div>
+	</div>
+
+
+
+
+
+
+
+
+
+  <noscript><c:out value="JavaScriptを使用できる環境でご利用ください。" /></noscript>
+  <div id="footer">
+    <div class="text">Copyright FUJITSU LIMITED 2005-2012</div>
+  </div>
+
+</body>
+</html>
+
+
