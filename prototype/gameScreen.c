@@ -20,8 +20,7 @@
 #define OBSTACLE_COUNT 1
 
 #define PUT_PROB 10
-#define PUT_WAIT_SPAN 16
-
+#define PUT_WAIT_SPAN 24
 #define OCCUPYED 3101
 
 
@@ -82,12 +81,15 @@ int gameScreen(int sp0, int sc0){
 	initGame(sp0, sc0);
 
 	FIELD[20] = &OBSTACLES[0];
-	FLAME_REF = 10;
+	FLAME_REF = 1;
 	JUMP_FLAG = 1;
 
 	timeout(TIMEOUT);
-	for( i=0; i<900; i++){
+	for( i=0; i<1000; i++){
 		inp = getch();
+		if( inp == ' ' && JUMP_FLAG == 0 ){
+			JUMP_FLAG = 1;
+		}
 		FLAMES++;
 		if( isRefTime() ){
 			renewField();
