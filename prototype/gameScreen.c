@@ -8,9 +8,12 @@
 #include "game_obstacle.h"
 #include "game_jumping.h"
 #include "game_bump.h"
+#include "game_levels.h"
+#include "highScore.h"
 
 
-#define TIMEOUT 20
+#define TIMEOUT 10
+
 
 
 int SCORE = 0;
@@ -22,7 +25,7 @@ int FLAME_REF;
 int PLAYER_JHEIGHT;
 MATRIX *PLAYER_MATRIX;
 
-void initGame(int sp0, int sc0){
+void initGame(int fps, int sc0){
 
 	initField();
 	initObstacleSet();
@@ -31,14 +34,19 @@ void initGame(int sp0, int sc0){
 	PLAYER_JHEIGHT = 0;
 	PLAYER_MATRIX = loadMatrix("player.mat");
 	FLAMES = 0;
-	FLAME_REF = 5;
+	setSpeed(fps);
+	SCORE = sc0;
+	SCORE_HIGH = getHighScore();
 	
 }
 
-int gameScreen(int sp0, int sc0){
+int gameScreen(int level){
 	int i, inp;
-
-	initGame(sp0, sc0);
+	LEVEL_P lvp;
+	
+	lvp = getLevelParameter(level);
+	initGame(lvp.fps, lvp.score);
+	
 	rs_initscr();
 	
 	timeout(TIMEOUT);
@@ -53,6 +61,10 @@ int gameScreen(int sp0, int sc0){
 			putObstacle(FIELD_WIDTH - 1);
 			jumpPlayer();
 			SCORE++;
+			
+			if( SCORE % 200 == 0 ){
+				FLAME_REF--;
+			}
 		
 			game_refreshScreen();
 			FLAMES = 0;
@@ -62,7 +74,10 @@ int gameScreen(int sp0, int sc0){
 		mvprintw(1, 2, "FLAMES=%4d, FLAME_REF=%4d\n", FLAMES, FLAME_REF);
 	}
 	
-	mvprintw(3, 2, "[[END]]");
+	setHighScore(SCORE);
+	SCORE_HIGH = getHighScore();
+	game_refreshScreen();
+	drawString(5, 5, "GAME OVER.", FORMAT_LEFT);
 	refresh();
 	sleep(2);
 	
@@ -76,3 +91,7 @@ int isRefTime(void){
 	return FLAMES >= FLAME_REF;
 }
 
+
+void setSpeed(int fps){
+	FLAME_REF = (1000/TIMEOUT) / fps;
+}

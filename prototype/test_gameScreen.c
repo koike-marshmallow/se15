@@ -4,14 +4,17 @@
 #include "matrix.h"
 #include "drawScreen.h"
 #include "gameScreen.h"
+#include "highScore.h"
+#include "game_levels.h"
 
 
 int main(void){
 	int tmp;
 	srand((unsigned)time(NULL));
 	
-	tmp = gameScreen(SPD_INIT, SCR_INIT);
-	printf("spd = %d, scr = %d, RET = %d\n", 
-		SPD_INIT, SCR_INIT, tmp);
+	loadHighScore("score");
+	tmp = gameScreen(LEVEL_NORMAL);
+	printf("RET = %d\n", tmp);
+	saveHighScore("score");
 	return 0;
 }

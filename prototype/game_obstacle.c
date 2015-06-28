@@ -1,9 +1,7 @@
 #include <stdlib.h>
 #include "matrix.h"
 #include "game_field.h"
-
-#define PUT_PROB 10
-#define PUT_WAIT_SPAN 24
+#include "game_obstacle.h"
 
 #define OBSTACLE_NUM 2
 
@@ -11,9 +9,14 @@
 MATRIX *OBSTACLES[OBSTACLE_NUM];
 int PUT_WAIT;
 
+int PUT_PROB;
+int PUT_WAIT_SPAN;
+
 
 void initObstacleSet(void){
 	PUT_WAIT = 0;
+	PUT_PROB = PUT_PROB_INIT;
+	PUT_WAIT_SPAN = PUT_WAIT_SPAN_INIT;
 	OBSTACLES[0] = loadMatrix("obs1.mat");
 	OBSTACLES[1] = loadMatrix("obs2.mat");
 	FIELD[60] = OBSTACLES[0];

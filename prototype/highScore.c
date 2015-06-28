@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "highScore.h"
 
-int SCORE = 0;
+int HSCORE = 0;
 
 int loadHighScore(char *fname){
 	FILE *fp;
@@ -12,7 +12,7 @@ int loadHighScore(char *fname){
 	}
 	
 	fscanf(fp, "%d", &tmp);
-	SCORE = tmp;
+	HSCORE = tmp;
 	
 	fclose(fp);
 	return 0;
@@ -26,7 +26,7 @@ int saveHighScore(char *fname){
 		return 1;
 	}
 	
-	fprintf(fp, "%d", SCORE);
+	fprintf(fp, "%d", HSCORE);
 	
 	fclose(fp);
 	return 0;
@@ -34,17 +34,17 @@ int saveHighScore(char *fname){
 
 
 void setHighScore(int s0){
-	if( SCORE < s0 ){
-		SCORE = s0;
+	if( HSCORE < s0 ){
+		HSCORE = s0;
 	}
 }
 
 
 int getHighScore(){
-	return SCORE;
+	return HSCORE;
 }
 
 
 void resetHighScore(){
-	SCORE = 0;
+	HSCORE = 0;
 }
