@@ -8,90 +8,73 @@
 #include "game_obstacle.h"
 #include "game_jumping.h"
 #include "game_bump.h"
-#include "game_levels.h"
 #include "highScore.h"
-
-
-#define TIMEOUT 10
-
-
 
 int SCORE = 0;
 int SCORE_HIGH = 20;
 
-int FLAMES;
-int FLAME_REF;
-
 int PLAYER_JHEIGHT;
 MATRIX *PLAYER_MATRIX;
+MATRIX *PLAYER_MATRIX_LOSE;
 
-void initGame(int fps, int sc0){
-
-	initField();
-	initObstacleSet();
-	initJumpFlag();
+void initGame(){
+	gfield_init();
+	gobstacle_init();
+	gjump_initFlag();
 	
 	PLAYER_JHEIGHT = 0;
 	PLAYER_MATRIX = loadMatrix("player.mat");
-	FLAMES = 0;
-	setSpeed(fps);
-	SCORE = sc0;
+	PLAYER_MATRIX_LOSE = loadMatrix("player_lose.mat");
 	SCORE_HIGH = getHighScore();
 	
 }
 
+
+void setTimeout(int fps){
+	if( fps == 0 ){
+		timeout(0);
+	}else{
+		timeout( 1000 / fps );
+	}
+}
+
+
 int gameScreen(int level){
 	int i, inp;
-	LEVEL_P lvp;
 	
-	lvp = getLevelParameter(level);
-	initGame(lvp.fps, lvp.score);
+	initGame();
+	SCORE = 0;
+	gdscr_initscr();
 	
-	rs_initscr();
+	setTimeout(10);
+	while( !gbump_check() ){
 	
-	timeout(TIMEOUT);
-	while( !checkBump() ){
+		/*入力受付処理*/
 		inp = getch();
 		if( inp == 'q' ) break;
-		if( inp == ' ' ) setJumpFlag();
-		
-		FLAMES++;	
-		if( isRefTime() ){
-			shiftField();
-			putObstacle(FIELD_WIDTH - 1);
-			jumpPlayer();
-			SCORE++;
-			
-			if( SCORE % 200 == 0 ){
-				FLAME_REF--;
-			}
-		
-			game_refreshScreen();
-			FLAMES = 0;
-		}
+		if( inp == ' ' ) gjump_flagSet();
 		
 		
-		mvprintw(1, 2, "FLAMES=%4d, FLAME_REF=%4d\n", FLAMES, FLAME_REF);
+		/*画面更新処理*/
+		gfield_shiftl();
+		gobstacle_put(&FIELD[FIELD_WIDTH - 1]);
+		gjump_jumpPlayer();
+		SCORE++;
+		gdscr_refresh();
 	}
 	
 	setHighScore(SCORE);
 	SCORE_HIGH = getHighScore();
-	game_refreshScreen();
+	freeMatrix(PLAYER_MATRIX);
+	PLAYER_MATRIX = PLAYER_MATRIX_LOSE;
+	/*終了画面描画*/
+	gdscr_draw();
 	drawString(5, 5, "GAME OVER.", FORMAT_LEFT);
 	refresh();
 	sleep(2);
 	
-	freeObstacleSet();
-	rs_endwin();
+	freeMatrix(PLAYER_MATRIX_LOSE);
+	gobstacle_memFree();
+	gdscr_endwin();
 	return 0;
-}
-
-
-int isRefTime(void){
-	return FLAMES >= FLAME_REF;
-}
-
-
-void setSpeed(int fps){
-	FLAME_REF = (1000/TIMEOUT) / fps;
 }
