@@ -10,17 +10,30 @@
 #include "game_bump.h"
 #include "highScore.h"
 
-int SCORE = 0;
-int SCORE_HIGH = 20;
+#define MAX_LEVEL 3
 
+LEVEL_P LEVEL_TABLE[MAX_LEVEL] = {
+	{10, 200},
+	{15, 500},
+	{20, 1000},
+};
+
+int SCORE;
+int SCORE_HIGH;
+int LEVEL;
 int PLAYER_JHEIGHT;
 MATRIX *PLAYER_MATRIX;
+
 MATRIX *PLAYER_MATRIX_LOSE;
 
-void initGame(){
+
+void initGame(int lv0, int sc0){
 	gfield_init();
 	gobstacle_init();
 	gjump_initFlag();
+	
+	SCORE = sc0;
+	LEVEL = lv0;
 	
 	PLAYER_JHEIGHT = 0;
 	PLAYER_MATRIX = loadMatrix("player.mat");
@@ -39,14 +52,25 @@ void setTimeout(int fps){
 }
 
 
-int gameScreen(int level){
+int checkLevelUp(void){
+	if( (LEVEL + 1) >= MAX_LEVEL ){
+		return 0;
+	}
+	if( SCORE >= LEVEL_TABLE[LEVEL].next_score ){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
+
+int gameScreen(int lv0, int sc0){
 	int i, inp;
 	
-	initGame();
-	SCORE = 0;
+	initGame(lv0, sc0);
 	gdscr_initscr();
 	
-	setTimeout(10);
+	setTimeout(LEVEL_TABLE[LEVEL].speed_fps);
 	while( !gbump_check() ){
 	
 		/*入力受付処理*/
@@ -54,6 +78,11 @@ int gameScreen(int level){
 		if( inp == 'q' ) break;
 		if( inp == ' ' ) gjump_flagSet();
 		
+		/*レベルアップ処理*/
+		if( checkLevelUp() ){
+			LEVEL++;
+			setTimeout(LEVEL_TABLE[LEVEL].speed_fps);
+		}
 		
 		/*画面更新処理*/
 		gfield_shiftl();
@@ -63,16 +92,19 @@ int gameScreen(int level){
 		gdscr_refresh();
 	}
 	
+	/*終了処理*/
 	setHighScore(SCORE);
 	SCORE_HIGH = getHighScore();
 	freeMatrix(PLAYER_MATRIX);
 	PLAYER_MATRIX = PLAYER_MATRIX_LOSE;
+	
 	/*終了画面描画*/
 	gdscr_draw();
 	drawString(5, 5, "GAME OVER.", FORMAT_LEFT);
 	refresh();
 	sleep(2);
 	
+	/*開放*/
 	freeMatrix(PLAYER_MATRIX_LOSE);
 	gobstacle_memFree();
 	gdscr_endwin();
