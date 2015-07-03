@@ -4,6 +4,10 @@
 #define LEVEL_NORMAL 1
 #define LEVEL_HARD 2
 
+#define COMMAND_RETRY 8001
+#define COMMAND_MENU 8002
+#define COMMAND_QUIT 8003
+
 struct level_profile{
 	int speed_fps;
 	int next_score;

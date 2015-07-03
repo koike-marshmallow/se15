@@ -9,13 +9,21 @@
 #include "game_jumping.h"
 #include "game_bump.h"
 #include "highScore.h"
+#include "getCommand.h"
 
 #define MAX_LEVEL 3
+#define COMMAND_NUM 3
 
 LEVEL_P LEVEL_TABLE[MAX_LEVEL] = {
-	{10, 200},
-	{15, 500},
-	{20, 1000},
+	{15, 200},
+	{20, 210},
+	{25, 1000},
+};
+
+CLIST COMMAND_LIST[COMMAND_NUM] = {
+	{'r', "retry"},
+	{'m', "menu"},
+	{'q', "quit"}
 };
 
 int SCORE;
@@ -45,7 +53,7 @@ void initGame(int lv0, int sc0){
 
 void setTimeout(int fps){
 	if( fps == 0 ){
-		timeout(0);
+		timeout(-1);
 	}else{
 		timeout( 1000 / fps );
 	}
@@ -95,18 +103,33 @@ int gameScreen(int lv0, int sc0){
 	/*終了処理*/
 	setHighScore(SCORE);
 	SCORE_HIGH = getHighScore();
+	setTimeout(0);
 	freeMatrix(PLAYER_MATRIX);
 	PLAYER_MATRIX = PLAYER_MATRIX_LOSE;
 	
 	/*終了画面描画*/
 	gdscr_draw();
 	drawString(5, 5, "GAME OVER.", FORMAT_LEFT);
+	printCommand(22, 76, FORMAT_RIGHT, COMMAND_LIST, COMMAND_NUM);
 	refresh();
-	sleep(2);
+	
+	/*コマンド取得*/
+	inp = getCommand(COMMAND_LIST, COMMAND_NUM);
 	
 	/*開放*/
 	freeMatrix(PLAYER_MATRIX_LOSE);
 	gobstacle_memFree();
 	gdscr_endwin();
-	return 0;
+	
+	/*メッセージ返却*/
+	switch( inp ){
+		case 'r':
+			return COMMAND_RETRY;
+		case 'm':
+			return COMMAND_MENU;
+		case 'q':
+			return COMMAND_QUIT;
+		default:
+			return 9999;
+	}
 }

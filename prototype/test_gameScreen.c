@@ -10,8 +10,20 @@ int main(void){
 	srand((unsigned)time(NULL));
 	
 	loadHighScore("score");
-	tmp = gameScreen(LEVEL_EASY, 0);
-	printf("RET = %d\n", tmp);
+	while( 1 ){
+		tmp = gameScreen(LEVEL_HARD, 0);
+		printf("RET = %d\n", tmp);
+	
+		if( tmp == COMMAND_RETRY ){
+			continue;
+		}else if( tmp == COMMAND_MENU ){
+			break;
+		}else if( tmp == COMMAND_QUIT ){
+			break;
+		}
+	}
+	
+	resetHighScore();
 	saveHighScore("score");
 	return 0;
 }
