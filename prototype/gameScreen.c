@@ -11,13 +11,16 @@
 #include "highScore.h"
 #include "getCommand.h"
 
-#define MAX_LEVEL 3
+#define MAX_LEVEL 6
 #define COMMAND_NUM 3
 
 LEVEL_P LEVEL_TABLE[MAX_LEVEL] = {
 	{15, 200},
-	{20, 210},
-	{25, 1000},
+	{20, 500},
+	{25, 800},
+	{30, 1000},
+	{35, 1500},
+	{40, 2000}
 };
 
 CLIST COMMAND_LIST[COMMAND_NUM] = {
@@ -77,6 +80,10 @@ int gameScreen(int lv0, int sc0){
 	
 	initGame(lv0, sc0);
 	gdscr_initscr();
+	
+	gdscr_refresh();
+	drawString(6, 40, "Press space key to start", FORMAT_CENTER);
+	while( (inp = getch()) != ' ' );
 	
 	setTimeout(LEVEL_TABLE[LEVEL].speed_fps);
 	while( !gbump_check() ){

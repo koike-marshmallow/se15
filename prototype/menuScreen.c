@@ -73,7 +73,7 @@ int menuScreen(MLIST list[], int mlist_num){
 					SELECTED = tmp;
 					break;
 				}
-				tmp--;
+				tmp++;
 			}
 		}
 	}

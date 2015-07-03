@@ -2,7 +2,7 @@
 
 #define LEVEL_EASY 0
 #define LEVEL_NORMAL 1
-#define LEVEL_HARD 2
+#define LEVEL_HARD 3
 
 #define COMMAND_RETRY 8001
 #define COMMAND_MENU 8002

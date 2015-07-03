@@ -21,7 +21,7 @@ void gdscr_endwin(void){
 
 
 void gdscr_refresh(void){
-	clear();
+	erase();
 	gdscr_draw();
 	refresh();
 }
@@ -34,6 +34,8 @@ void gdscr_draw(void){
 	drawBox(0, 0, SCRSIZE_Y, SCRSIZE_X);
 	/*地面*/
 	drawGround(FIELD_ORIGIN_Y, FIELD_ORIGIN_X, FIELD_WIDTH);
+	/*操作方法*/
+	drawString(22, 2, "Press space key to JUMP", FORMAT_LEFT);
 	/*障害物*/
 	for( i=0; i < FIELD_WIDTH; i++){
 		if( FIELD[i] != NULL ){
