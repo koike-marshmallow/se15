@@ -1,0 +1,81 @@
+************
+ ä÷êîÉäÉXÉg 
+************
+
+
+[1. run_savannah.c]
+int gameLoop(int lev, int score);
+void levelUnlock(void);
+int main(void);
+
+
+[2. menuScreen.c]
+void drawItemList(int y, int x, MLIST list[], int mlist_num);
+int menuScreen(MLIST list[], int mlist_num);
+
+
+[3. gameScreen.c]
+void initGame(int lv0, int sc0);
+void setTimeout(int fps);
+int checkLevelUp(void);
+int gameScreen(int lv0, int sc0);
+
+
+[3a. game_bump.c]
+void gbump_initMask(void);
+void gbump_putMask(int y, int x, MATRIX *matrix, itn mode);
+int gbump_checkMask(void);
+int gbump_check(void);
+
+
+[3b. game_drawScreen.c]
+void gdscr_initscr(void);
+void gdscr_endwin(void);
+void gdscr_refresh(void);
+void gdscr_draw(void);
+void gdscr_draw2array(int y, int x, int *ary, int i_max, int j_max);
+
+
+[3c. game_field.c]
+void gfield_init(void);
+void gfield_shiftl(void);
+
+
+[3d. game_jumping.c]
+void gjump_initFlag(void);
+void gjump_flagSet(void);
+void gjump_jumpPlayer(void);
+
+
+[3e. game_obstacle.c]
+void gobstacle_init(void);
+int gobstacle_put(MATRIX **field_ads);
+void gobstacle_memFree(void);
+
+
+[4. drawScreen.c]
+void rs_initscr(void);
+void rs_endwin(void);
+void drawString(int pos_y, int pos_x, char *str, int format);
+void drawMatrix(int pos_y, int pos_x, MATRIX *matrix);
+void drawBox(int pos_y, int pos_x, int height, int width);
+void drawGround(int y, int x, int width);
+
+
+[5. highScore.c]
+int loadHighScore(char *fname);
+int saveHighScore(char *fname);
+void setHighScore(int s0);
+int getHighScore(void);
+void resetHighScore(void);
+
+
+[6. matrix.c]
+int searchConvertTable(char c);
+MATRIX *loadMatrix(char *fname);
+void freeMatrix(MATRIX *matrix);
+
+
+[7. getCommand.c]
+void printCommand(int y, int x, int format, CLIST list[], int list_len);
+int getCommand(CLIST list[], int list_len);
