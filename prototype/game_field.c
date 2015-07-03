@@ -5,7 +5,7 @@
 MATRIX *FIELD[FIELD_WIDTH];
 
 
-void initField(void){
+void gfield_init(void){
 	int i;
 	
 	for( i=0; i<FIELD_WIDTH; i++){
@@ -13,7 +13,7 @@ void initField(void){
 	}
 }
 
-void shiftField(void){
+void gfield_shiftl(void){
 	int i;
 	
 	for( i=0; i<FIELD_WIDTH - 1; i++){

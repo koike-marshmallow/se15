@@ -8,90 +8,105 @@
 #include "game_obstacle.h"
 #include "game_jumping.h"
 #include "game_bump.h"
-#include "game_levels.h"
 #include "highScore.h"
 
+#define MAX_LEVEL 3
 
-#define TIMEOUT 10
+LEVEL_P LEVEL_TABLE[MAX_LEVEL] = {
+	{10, 200},
+	{15, 500},
+	{20, 1000},
+};
 
-
-
-int SCORE = 0;
-int SCORE_HIGH = 20;
-
-int FLAMES;
-int FLAME_REF;
-
+int SCORE;
+int SCORE_HIGH;
+int LEVEL;
 int PLAYER_JHEIGHT;
 MATRIX *PLAYER_MATRIX;
 
-void initGame(int fps, int sc0){
+MATRIX *PLAYER_MATRIX_LOSE;
 
-	initField();
-	initObstacleSet();
-	initJumpFlag();
+
+void initGame(int lv0, int sc0){
+	gfield_init();
+	gobstacle_init();
+	gjump_initFlag();
+	
+	SCORE = sc0;
+	LEVEL = lv0;
 	
 	PLAYER_JHEIGHT = 0;
 	PLAYER_MATRIX = loadMatrix("player.mat");
-	FLAMES = 0;
-	setSpeed(fps);
-	SCORE = sc0;
+	PLAYER_MATRIX_LOSE = loadMatrix("player_lose.mat");
 	SCORE_HIGH = getHighScore();
 	
 }
 
-int gameScreen(int level){
+
+void setTimeout(int fps){
+	if( fps == 0 ){
+		timeout(0);
+	}else{
+		timeout( 1000 / fps );
+	}
+}
+
+
+int checkLevelUp(void){
+	if( (LEVEL + 1) >= MAX_LEVEL ){
+		return 0;
+	}
+	if( SCORE >= LEVEL_TABLE[LEVEL].next_score ){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
+
+int gameScreen(int lv0, int sc0){
 	int i, inp;
-	LEVEL_P lvp;
 	
-	lvp = getLevelParameter(level);
-	initGame(lvp.fps, lvp.score);
+	initGame(lv0, sc0);
+	gdscr_initscr();
 	
-	rs_initscr();
+	setTimeout(LEVEL_TABLE[LEVEL].speed_fps);
+	while( !gbump_check() ){
 	
-	timeout(TIMEOUT);
-	while( !checkBump() ){
+		/*入力受付処理*/
 		inp = getch();
 		if( inp == 'q' ) break;
-		if( inp == ' ' ) setJumpFlag();
+		if( inp == ' ' ) gjump_flagSet();
 		
-		FLAMES++;	
-		if( isRefTime() ){
-			shiftField();
-			putObstacle(FIELD_WIDTH - 1);
-			jumpPlayer();
-			SCORE++;
-			
-			if( SCORE % 200 == 0 ){
-				FLAME_REF--;
-			}
-		
-			game_refreshScreen();
-			FLAMES = 0;
+		/*レベルアップ処理*/
+		if( checkLevelUp() ){
+			LEVEL++;
+			setTimeout(LEVEL_TABLE[LEVEL].speed_fps);
 		}
 		
-		
-		mvprintw(1, 2, "FLAMES=%4d, FLAME_REF=%4d\n", FLAMES, FLAME_REF);
+		/*画面更新処理*/
+		gfield_shiftl();
+		gobstacle_put(&FIELD[FIELD_WIDTH - 1]);
+		gjump_jumpPlayer();
+		SCORE++;
+		gdscr_refresh();
 	}
 	
+	/*終了処理*/
 	setHighScore(SCORE);
 	SCORE_HIGH = getHighScore();
-	game_refreshScreen();
+	freeMatrix(PLAYER_MATRIX);
+	PLAYER_MATRIX = PLAYER_MATRIX_LOSE;
+	
+	/*終了画面描画*/
+	gdscr_draw();
 	drawString(5, 5, "GAME OVER.", FORMAT_LEFT);
 	refresh();
 	sleep(2);
 	
-	freeObstacleSet();
-	rs_endwin();
+	/*開放*/
+	freeMatrix(PLAYER_MATRIX_LOSE);
+	gobstacle_memFree();
+	gdscr_endwin();
 	return 0;
-}
-
-
-int isRefTime(void){
-	return FLAMES >= FLAME_REF;
-}
-
-
-void setSpeed(int fps){
-	FLAME_REF = (1000/TIMEOUT) / fps;
 }

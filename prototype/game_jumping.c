@@ -2,22 +2,33 @@
 #include "gameScreen.h"
 #include "game_jumping.h"
 
+#define DEFAULT_JUMP_HEIGHT 6
+#define DEFAULT_JUMP_INT 1
+
+int JUMP_HEIGHT;
+int JUMP_INT;
+
+/* externされていない変数 */
 int JUMP_FLAG;
 int JUMP_WAIT;
 
-void initJumpFlag(void){
+
+void gjump_initFlag(void){
+	JUMP_HEIGHT = DEFAULT_JUMP_HEIGHT;
+	JUMP_INT = DEFAULT_JUMP_INT;
 	JUMP_FLAG = 0;
 	JUMP_WAIT = 0;
 }
 
-void setJumpFlag(void){
+
+void gjump_flagSet(void){
 	if( JUMP_FLAG == 0 ){
 		JUMP_FLAG = 1;
 	}
 }
 
 
-void jumpPlayer(void){
+void gjump_jumpPlayer(void){
 	if( JUMP_WAIT > 0 ){
 		JUMP_WAIT--;
 		return;

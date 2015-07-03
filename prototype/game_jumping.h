@@ -1,5 +1,6 @@
-#define JUMP_HEIGHT 6
-#define JUMP_INT 1
+extern JUMP_HEIGHT;
+extern JUMP_INT;
 
-void setJumpFlag(void);
-void jumpPlayer(void);
+void gjump_initFlag(void);
+void gjump_flagSet(void);
+void gjump_jumpPlayer(void);

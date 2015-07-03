@@ -7,16 +7,27 @@
 
 #define BUF_SIZE 128
 
-char STRING_BUF[BUF_SIZE];
+char GDSCR_STRBUF[BUF_SIZE];
 
-void game_refreshScreen(void){
+
+void gdscr_initscr(void){
+	rs_initscr();
+}
+
+
+void gdscr_endwin(void){
+	rs_endwin();
+}
+
+
+void gdscr_refresh(void){
 	clear();
-	game_drawScreen();
+	gdscr_draw();
 	refresh();
 }
 
 
-void game_drawScreen(void){
+void gdscr_draw(void){
 	int i;
 	
 	/*画面枠*/
@@ -35,14 +46,14 @@ void game_drawScreen(void){
 		PLAYER_POS_X, PLAYER_MATRIX
 	);
 	/*スコア*/
-	sprintf(STRING_BUF, "SCORE: %6d (%6d)", SCORE, SCORE_HIGH);
-	drawString(2, 76, STRING_BUF, FORMAT_RIGHT);
+	sprintf(GDSCR_STRBUF, "SCORE: %6d (%6d)", SCORE, SCORE_HIGH);
+	drawString(2, 76, GDSCR_STRBUF, FORMAT_RIGHT);
 	
 	return;
 }
 
 
-void draw2array(int y, int x, int *ary, int i_max, int j_max){
+void gdscr_draw2array(int y, int x, int *ary, int i_max, int j_max){
 	int i, j;
 	
 	for( i=i_max-1; i>=0; i--){

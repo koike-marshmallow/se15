@@ -3,7 +3,6 @@
 #include <ncurses.h>
 #include "matrix.h"
 
-
 #define CONVERT_TABLE_SIZE 7
 
 char CONVERT_TABLE_INPUT[CONVERT_TABLE_SIZE] = {

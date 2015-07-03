@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <unistd.h>
 #include "matrix.h"
 #include "gameScreen.h"
 #include "game_field.h"
@@ -14,7 +13,7 @@
 int MASK[CHECK_AREA_HEIGHT][CHECK_AREA_WIDTH];
 
 
-void initMask(void){
+void gbump_initMask(void){
 	int i, j;
 	
 	for( i=0; i<CHECK_AREA_HEIGHT; i++){
@@ -24,7 +23,7 @@ void initMask(void){
 	}
 }
 
-void putMask(int y, int x, MATRIX *matrix, int mode){
+void gbump_putMask(int y, int x, MATRIX *matrix, int mode){
 	int i, j, cnt = 0;
 	int *dp;
 	
@@ -55,7 +54,7 @@ void putMask(int y, int x, MATRIX *matrix, int mode){
 	return;
 }
 
-int checkMask(void){
+int gbump_checkMask(void){
 	int i, j;
 
 	for( i=0; i<CHECK_AREA_HEIGHT; i++){
@@ -66,17 +65,17 @@ int checkMask(void){
 	return 0;
 }
 
-int checkBump(void){
+int gbump_check(void){
 	int i;
 	
-	initMask();
+	gbump_initMask();
 	
 	for( i=0; i<CHECK_AREA_WIDTH; i++){
 		if( FIELD[i] != NULL ){
-			putMask(0, i, FIELD[i], PUT);
+			gbump_putMask(0, i, FIELD[i], PUT);
 		}
 	}
-	putMask(PLAYER_JHEIGHT, PLAYER_POS_X, PLAYER_MATRIX, ADD);
+	gbump_putMask(PLAYER_JHEIGHT, PLAYER_POS_X, PLAYER_MATRIX, ADD);
 	
-	return checkMask();
+	return gbump_checkMask();
 }

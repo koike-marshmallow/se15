@@ -2,5 +2,5 @@
 
 extern MATRIX *FIELD[FIELD_WIDTH];
 
-void shiftField();
-void initField();
+void gfield_init(void);
+void gfield_shiftl(void);
