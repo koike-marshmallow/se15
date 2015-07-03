@@ -13,7 +13,7 @@ int main(void){
 	srand((unsigned)time(NULL));
 	
 	loadHighScore("score");
-	tmp = gameScreen(LEVEL_NORMAL);
+	tmp = gameScreen(LEVEL_HARD);
 	printf("RET = %d\n", tmp);
 	saveHighScore("score");
 	return 0;
