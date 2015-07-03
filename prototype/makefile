@@ -25,10 +25,10 @@ test_menuScreen.o : test_menuScreen.c menuScreen.h
 	cc -c test_menuScreen.c
 #
 #main
-run2savannah : run2savannah.o drawScreen.o highScore.o menuScreen.o matrix.o gameScreen.o game_bump.o game_field.o game_drawScreen.o game_obstacle.o game_jumping.o getCommand.o
-	cc -o run2savannah run2savannah.o drawScreen.o highScore.o menuScreen.o matrix.o gameScreen.o game_bump.o game_field.o game_drawScreen.o game_obstacle.o game_jumping.o getCommand.o -lncurses
-run2savannah.o : run2savannah.c matrix.h menuScreen.h gameScreen.h highScore.h
-	cc -c run2savannah.c
+run_savannah : run_savannah.o drawScreen.o highScore.o menuScreen.o matrix.o gameScreen.o game_bump.o game_field.o game_drawScreen.o game_obstacle.o game_jumping.o getCommand.o
+	cc -o run_savannah run_savannah.o drawScreen.o highScore.o menuScreen.o matrix.o gameScreen.o game_bump.o game_field.o game_drawScreen.o game_obstacle.o game_jumping.o getCommand.o -lncurses
+run_savannah.o : run_savannah.c matrix.h menuScreen.h gameScreen.h highScore.h
+	cc -c run_savannah.c
 #
 #modules
 drawScreen.o : drawScreen.c drawScreen.h

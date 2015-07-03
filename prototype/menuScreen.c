@@ -5,15 +5,20 @@
 
 #define LIST_POS_X 20
 #define LIST_POS_Y 15
+#define BUF_LEN 32
 
 int SELECTED;
-MATRIX *TITLE;
+MATRIX *M_TITLE;
+char MS_STRBUF[BUF_LEN];
 
 void drawItemList(int y, int x, MLIST list[], int mlist_num){
 	int i;
 	clear();
 
-	drawMatrix(5, 10,TITLE);	
+	sprintf(MS_STRBUF, "HIGHSCORE %6d ", getHighScore());
+	drawString(2, 76, MS_STRBUF, FORMAT_RIGHT);
+	
+	drawMatrix(5, 10,M_TITLE);	
 	for( i=0; i<mlist_num; i++){
 		if( list[i].visible == MVISIB_VISIBLE ){
 			if( i == SELECTED ){
@@ -30,7 +35,7 @@ int menuScreen(MLIST list[], int mlist_num){
 	int inp, tmp;
 	
 	SELECTED = 0;
-	TITLE = loadMatrix("title.mat");
+	M_TITLE = loadMatrix("title.mat");
 	rs_initscr();
 	
 	/*入力受付処理*/
@@ -74,6 +79,6 @@ int menuScreen(MLIST list[], int mlist_num){
 	}
 	
 	rs_endwin();
-	freeMatrix(TITLE);
+	freeMatrix(M_TITLE);
 	return list[SELECTED].no;
 }	
