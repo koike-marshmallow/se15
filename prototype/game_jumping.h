@@ -1,5 +1,5 @@
-extern JUMP_HEIGHT;
-extern JUMP_INT;
+extern int JUMP_HEIGHT;
+extern int JUMP_INT;
 
 void gjump_initFlag(void);
 void gjump_flagSet(void);

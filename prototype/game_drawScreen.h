@@ -4,6 +4,8 @@
 #define FIELD_ORIGIN_X 1
 #define FIELD_ORIGIN_Y 20
 
+void gdscr_initscr(void);
+void gdscr_endwin(void);
 void gdscr_refresh(void);
 void gdscr_draw(void);
 void gdscr_draw2array(int y, int x, int *ary, int i_max, int j_max);

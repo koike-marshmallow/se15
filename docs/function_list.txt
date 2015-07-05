@@ -1,7 +1,6 @@
 ************
- ŠÖ”ƒŠƒXƒg 
+ é–¢æ•°ãƒªã‚¹ãƒˆ
 ************
-
 
 [1. run_savannah.c]
 int gameLoop(int lev, int score);
