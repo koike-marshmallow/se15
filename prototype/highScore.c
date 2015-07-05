@@ -7,6 +7,8 @@ int loadHighScore(char *fname){
 	FILE *fp;
 	int tmp;
 	
+	HSCORE = 0;
+	
 	if( (fp = fopen(fname, "r")) == NULL ){
 		return 1;
 	}
