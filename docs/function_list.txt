@@ -15,8 +15,9 @@ int menuScreen(MLIST list[], int mlist_num);
 
 [3. gameScreen.c]
 void initGame(int lv0, int sc0);
-void setTimeout(int fps);
+void setDelay(int fps);
 int checkLevelUp(void);
+void setLevel(int level);
 int gameScreen(int lv0, int sc0);
 
 

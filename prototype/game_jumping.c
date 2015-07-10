@@ -2,7 +2,7 @@
 #include "gameScreen.h"
 #include "game_jumping.h"
 
-#define DEFAULT_JUMP_HEIGHT 6
+#define DEFAULT_JUMP_HEIGHT  6
 #define DEFAULT_JUMP_INT 1
 
 int JUMP_HEIGHT;
