@@ -11,6 +11,7 @@
 struct level_profile{
 	int speed_fps;
 	int next_score;
+	int obs_range;
 };
 typedef struct level_profile LEVEL_P;
 

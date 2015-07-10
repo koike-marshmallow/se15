@@ -15,12 +15,12 @@
 #define COMMAND_NUM 3
 
 LEVEL_P LEVEL_TABLE[MAX_LEVEL] = {
-	{15, 200},
-	{20, 500},
-	{25, 800},
-	{30, 1000},
-	{35, 1500},
-	{40, 2000}
+	{15,  200, 1},
+	{20,  500, 2},
+	{25,  800, 2},
+	{30, 1000, 3},
+	{35, 1500, 3},
+	{40, 2000, 3}
 };
 
 CLIST COMMAND_LIST[COMMAND_NUM] = {
@@ -54,16 +54,6 @@ void initGame(int lv0, int sc0){
 	
 }
 
-/*
-void setTimeout(int fps){
-	if( fps == 0 ){
-		timeout(-1);
-	}else{
-		timeout( 1000 / fps );
-	}
-}
-*/
-
 
 void setDelay(int fps){
 	DELAY = 1000000 / fps;
@@ -82,6 +72,12 @@ int checkLevelUp(void){
 }
 
 
+void setLevel(int level){
+	setDelay(LEVEL_TABLE[LEVEL].speed_fps);
+	OBSTACLE_RANGE = LEVEL_TABLE[LEVEL].obs_range;
+}
+
+
 int gameScreen(int lv0, int sc0){
 	int i, inp;
 	
@@ -92,8 +88,8 @@ int gameScreen(int lv0, int sc0){
 	drawString(6, 40, "Press space key to start", FORMAT_CENTER);
 	while( (inp = getch()) != ' ' );
 	
-	setDelay(LEVEL_TABLE[LEVEL].speed_fps);
 	timeout(0);
+	setLevel(LEVEL);
 	while( !gbump_check() ){
 	
 		/*sleep処理*/
@@ -107,7 +103,7 @@ int gameScreen(int lv0, int sc0){
 		/*レベルアップ処理*/
 		if( checkLevelUp() ){
 			LEVEL++;
-			setDelay(LEVEL_TABLE[LEVEL].speed_fps);
+			setLevel(LEVEL);
 		}
 		
 		/*画面更新処理*/
