@@ -33,6 +33,7 @@ int SCORE;
 int SCORE_HIGH;
 int LEVEL;
 int PLAYER_JHEIGHT;
+int DELAY;
 MATRIX *PLAYER_MATRIX;
 
 MATRIX *PLAYER_MATRIX_LOSE;
@@ -53,13 +54,19 @@ void initGame(int lv0, int sc0){
 	
 }
 
-
+/*
 void setTimeout(int fps){
 	if( fps == 0 ){
 		timeout(-1);
 	}else{
 		timeout( 1000 / fps );
 	}
+}
+*/
+
+
+void setDelay(int fps){
+	DELAY = 1000000 / fps;
 }
 
 
@@ -85,8 +92,12 @@ int gameScreen(int lv0, int sc0){
 	drawString(6, 40, "Press space key to start", FORMAT_CENTER);
 	while( (inp = getch()) != ' ' );
 	
-	setTimeout(LEVEL_TABLE[LEVEL].speed_fps);
+	setDelay(LEVEL_TABLE[LEVEL].speed_fps);
+	timeout(0);
 	while( !gbump_check() ){
+	
+		/*sleep処理*/
+		usleep(DELAY);
 	
 		/*入力受付処理*/
 		inp = getch();
@@ -96,7 +107,7 @@ int gameScreen(int lv0, int sc0){
 		/*レベルアップ処理*/
 		if( checkLevelUp() ){
 			LEVEL++;
-			setTimeout(LEVEL_TABLE[LEVEL].speed_fps);
+			setDelay(LEVEL_TABLE[LEVEL].speed_fps);
 		}
 		
 		/*画面更新処理*/
@@ -110,7 +121,7 @@ int gameScreen(int lv0, int sc0){
 	/*終了処理*/
 	setHighScore(SCORE);
 	SCORE_HIGH = getHighScore();
-	setTimeout(0);
+	timeout(-1);
 	freeMatrix(PLAYER_MATRIX);
 	PLAYER_MATRIX = PLAYER_MATRIX_LOSE;
 	

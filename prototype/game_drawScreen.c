@@ -30,8 +30,6 @@ void gdscr_refresh(void){
 void gdscr_draw(void){
 	int i;
 	
-	/*画面枠*/
-	drawBox(0, 0, SCRSIZE_Y, SCRSIZE_X);
 	/*地面*/
 	drawGround(FIELD_ORIGIN_Y, FIELD_ORIGIN_X, FIELD_WIDTH);
 	/*操作方法*/
@@ -50,6 +48,9 @@ void gdscr_draw(void){
 	/*スコア*/
 	sprintf(GDSCR_STRBUF, "SCORE: %6d (%6d)", SCORE, SCORE_HIGH);
 	drawString(2, 76, GDSCR_STRBUF, FORMAT_RIGHT);
+	
+	/*画面枠*/
+	drawBox(0, 0, SCRSIZE_Y, SCRSIZE_X);
 	
 	return;
 }
