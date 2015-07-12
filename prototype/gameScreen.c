@@ -73,8 +73,8 @@ int checkLevelUp(void){
 
 
 void setLevel(int level){
-	setDelay(LEVEL_TABLE[LEVEL].speed_fps);
-	OBSTACLE_RANGE = LEVEL_TABLE[LEVEL].obs_range;
+	setDelay(LEVEL_TABLE[level].speed_fps);
+	OBSTACLE_RANGE = LEVEL_TABLE[level].obs_range;
 }
 
 

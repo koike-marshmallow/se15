@@ -19,24 +19,6 @@ MLIST mlist[MLIST_SIZE] = {
 	{SEL_QUIT, "QUIT", MSTATE_ENABLE, MVISIB_VISIBLE}
 };
 
-int gameLoop(int lev, int score){
-	int tmp;
-	
-	while( 1 ){
-		tmp = gameScreen(lev, score);
-		
-		if( tmp == COMMAND_RETRY ){
-			continue;
-		}else if( tmp == COMMAND_MENU ){
-			return COMMAND_MENU;
-		}else{
-			break;
-		}
-	}
-	
-	return COMMAND_QUIT;
-}
-
 
 void levelUnlock(void){
 	if( getHighScore() > 200 ){
@@ -51,33 +33,44 @@ void levelUnlock(void){
 
 
 int main(void){
-	int com;
+	int quit, select, gret;
 	
-	loadHighScore("score");
-		
-	while( 1 ){
+	if( loadHighScore("score") != 0 ){
+		fprintf(stderr, "スコアファイルを読み込めませんでした\n");
+		return 0;
+	}
+	
+	quit = 0;
+	gret = 0;
+	while( !quit ){
 		levelUnlock();
-		com = menuScreen(mlist, MLIST_SIZE);
 		
-		if( com == SEL_GEASY ){
-			com = gameLoop(LEVEL_EASY, 0);
-		}
-		else if( com == SEL_GNORMAL ){
-			com = gameLoop(LEVEL_NORMAL, 0);
-		}
-		else if( com == SEL_GHARD ){
-			com = gameLoop(LEVEL_HARD, 1000);
-		}
-		else if( com == SEL_QUIT ){
-			break;
+		if( gret != COMMAND_RETRY ){
+			select = menuScreen(mlist, MLIST_SIZE);
 		}
 		
-		if( com == COMMAND_QUIT ){
-			 break;
+		switch( select ){
+			case SEL_GEASY:
+				gret = gameScreen(LEVEL_EASY, 0);
+				break;
+			case SEL_GNORMAL:
+				gret = gameScreen(LEVEL_NORMAL, 0);
+				break;
+			case SEL_GHARD:
+				gret = gameScreen(LEVEL_HARD, 1000);
+				break;
+			
+			case SEL_QUIT:
+				quit = 1;
+				break;
 		}
+		
+		if( gret == COMMAND_QUIT ){
+			quit = 1;
+		}	
 	}
 	
 	saveHighScore("score");
+	
 	return 0;
 }
-	
