@@ -4,7 +4,7 @@
 
 #define SCORE_FILE_NAME "score"
 
-int main(int argc, char argv[]){
+int main(int argc, char *argv[]){
 	int opt;
 	int score, flag;
 	

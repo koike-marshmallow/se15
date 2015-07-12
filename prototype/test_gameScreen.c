@@ -6,18 +6,22 @@
 
 
 int main(void){
-	int tmp;
+	int tmp, levels;
 	srand((unsigned)time(NULL));
 	
 	loadHighScore("score");
+	levels = 7;
 	while( 1 ){
-		tmp = gameScreen(LEVEL_HARD, 0);
+		tmp = gameScreen(levels, 0);
 		printf("RET = %d\n", tmp);
 	
 		if( tmp == COMMAND_RETRY ){
 			continue;
 		}else if( tmp == COMMAND_MENU ){
-			break;
+			printf("input level: ");
+			fflush(stdout);
+			scanf("%d", &levels);
+			continue;
 		}else if( tmp == COMMAND_QUIT ){
 			break;
 		}

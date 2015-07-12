@@ -40,13 +40,13 @@ MATRIX *loadMatrix(char *fname){
 	int i, conv;
 	
 	if( (in = fopen(fname, "r")) == NULL ){
-		fprintf(stderr, "loadMatrix: cannot open file\n");
-		return NULL;
+		fprintf(stderr, "loadMatrix: cannot open file [%s]\n" , fname);
+		exit(1);
 	}
 	
 	if( (matrix = malloc(sizeof(MATRIX))) == NULL ){
 		fprintf(stderr, "loadMatrix: cannot allocate memory (0)\n");
-		return NULL;
+		exit(1);
 	}
 	
 	fscanf(in, "%d", &matrix->size_y);
@@ -55,7 +55,8 @@ MATRIX *loadMatrix(char *fname){
 	
 	if( (matrix->dots = malloc(sizeof(int) * length)) == NULL ){
 		fprintf(stderr, "loadMatrix: cannot allocate memory (1)\n");
-		return NULL;
+		free(matrix);
+		exit(1);
 	}
 	
 	i = 0;

@@ -36,8 +36,7 @@ int main(void){
 	int quit, select, gret;
 	
 	if( loadHighScore("score") != 0 ){
-		fprintf(stderr, "スコアファイルを読み込めませんでした\n");
-		return 0;
+		setHighScore(0);
 	}
 	
 	quit = 0;

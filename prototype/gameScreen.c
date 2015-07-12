@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <ncurses.h>
 #include <unistd.h>
 #include "matrix.h"
@@ -11,7 +12,7 @@
 #include "highScore.h"
 #include "getCommand.h"
 
-#define MAX_LEVEL 6
+#define MAX_LEVEL 10
 #define COMMAND_NUM 3
 
 LEVEL_P LEVEL_TABLE[MAX_LEVEL] = {
@@ -20,7 +21,11 @@ LEVEL_P LEVEL_TABLE[MAX_LEVEL] = {
 	{25,  800, 2},
 	{30, 1000, 3},
 	{35, 1500, 3},
-	{40, 2000, 3}
+	{40, 2000, 3},
+	{45, 3000, 3},
+	{50, 4000, 3},
+	{55, 5000, 3},
+	{60, 6000, 3}
 };
 
 CLIST COMMAND_LIST[COMMAND_NUM] = {
@@ -81,6 +86,10 @@ void setLevel(int level){
 int gameScreen(int lv0, int sc0){
 	int i, inp;
 	
+	if( lv0 >= MAX_LEVEL || lv0 < 0 ){
+		fprintf(stderr, "レベル指定が不正です\n");
+		exit(1);
+	}
 	initGame(lv0, sc0);
 	gdscr_initscr();
 	
