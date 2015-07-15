@@ -12,6 +12,7 @@ char GDSCR_STRBUF[BUF_SIZE];
 
 void gdscr_initscr(void){
 	rs_initscr();
+	assertScreenSize(SCRSIZE_Y, SCRSIZE_X);
 }
 
 

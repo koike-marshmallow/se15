@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <ncurses.h>
 #include <string.h>
 #include "matrix.h"
@@ -35,6 +36,18 @@ void rs_endwin(void){
 	
 	return;
 }
+
+
+void assertScreenSize(int size_y, int size_x){
+	int max_x, max_y;
+	
+	getmaxyx(stdscr, max_y, max_x);
+	if( (size_y > max_y) || (size_x > max_x) ){
+		rs_endwin();
+		fprintf(stderr, "端末サイズを %d × %d 以上にしてください\n", size_x, size_y);
+		exit(1);
+	}
+} 
 
 
 void drawString(int pos_y, int pos_x, char *str, int format){

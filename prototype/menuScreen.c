@@ -3,6 +3,9 @@
 #include "drawScreen.h"
 #include "menuScreen.h"
 
+#define SCRSIZE_X 80
+#define SCRSIZE_Y 24
+
 #define LIST_POS_X 20
 #define LIST_POS_Y 15
 #define BUF_LEN 32
@@ -37,10 +40,10 @@ int menuScreen(MLIST list[], int mlist_num){
 	SELECTED = 0;
 	M_TITLE = loadMatrix("title.mat");
 	rs_initscr();
+	assertScreenSize(SCRSIZE_Y, SCRSIZE_X);
 	
 	/*入力受付処理*/
 	while( 1 ){
-		mvprintw(0, 0, "SELECTED = %d\n", SELECTED);
 		drawItemList(LIST_POS_Y, LIST_POS_X, list, mlist_num);
 		refresh();
 		

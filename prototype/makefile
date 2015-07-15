@@ -53,3 +53,9 @@ getCommand.o : getCommand.c getCommand.h drawScreen.h matrix.h
 	cc -c getCommand.c
 menuScreen.o : menuScreen.c matrix.h drawScreen.h menuScreen.h
 	cc -c menuScreen.c
+#
+#tools
+resetScore : resetScore.o highScore.o
+	cc -o resetScore resetScore.o highScore.o
+resetScore.o : resetScore.c highScore.h
+	cc -c resetScore.c
