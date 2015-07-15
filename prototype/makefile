@@ -59,3 +59,21 @@ resetScore : resetScore.o highScore.o
 	cc -o resetScore resetScore.o highScore.o
 resetScore.o : resetScore.c highScore.h
 	cc -c resetScore.c
+#
+#release
+release_dir = ../release
+release : run_savannah.o drawScreen.o highScore.o menuScreen.o matrix.o gameScreen.o game_bump.o game_field.o game_drawScreen.o game_obstacle.o game_jumping.o getCommand.o title.mat player.mat player_lose.mat obs1.mat obs2.mat obs3.mat score
+#	フォルダ作成
+	if [ -d $(release_dir) ]; \
+	then rm -rf $(release_dir); \
+	fi
+	mkdir $(release_dir)
+#	ファイル作成
+	cc -o $(release_dir)/run_savannah run_savannah.o drawScreen.o highScore.o menuScreen.o matrix.o gameScreen.o game_bump.o game_field.o game_drawScreen.o game_obstacle.o game_jumping.o getCommand.o -lncurses
+	cp title.mat $(release_dir)/title.mat
+	cp player.mat $(release_dir)/player.mat
+	cp player_lose.mat $(release_dir)/player_lose.mat
+	cp obs1.mat $(release_dir)/obs1.mat
+	cp obs2.mat $(release_dir)/obs2.mat
+	cp obs3.mat $(release_dir)/obs3.mat
+
