@@ -2,17 +2,18 @@
 #include <unistd.h>
 #include "highScore.h"
 
-#define SCORE_FILE_NAME "score"
+char *SCORE_FILE_NAME = "score";
 
 int main(int argc, char *argv[]){
 	int opt;
 	int score, flag;
-	
+	char *file_name;
 	
 	flag = 0;
-	while( (opt = getopt(argc, argv, "rs:")) != -1 ){
+	file_name = SCORE_FILE_NAME;
+	while( (opt = getopt(argc, argv, "rs:f:")) != -1 ){
 		
-		if( flag != 0 ){
+		if( flag != 0 && (opt == 's' || opt == 'r') ){
 			fprintf(stderr, "オプション[-s, -r]は同時に指定することができません\n");
 			return 0;
 		}
@@ -26,6 +27,9 @@ int main(int argc, char *argv[]){
 				flag = 1;
 				score = atoi(optarg);
 				break;
+			case 'f':
+				file_name = optarg;
+				break;
 		}
 	}
 	
@@ -35,7 +39,9 @@ int main(int argc, char *argv[]){
 	}
 	
 	setHighScore(score);
-	saveHighScore(SCORE_FILE_NAME);
+	if( saveHighScore(file_name) != 0 ){
+		fprintf(stderr, "書き込みが正常に完了しませんでした\n");
+	}
 	
 	return 0;
 }		
