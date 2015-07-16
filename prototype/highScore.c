@@ -5,7 +5,7 @@ int HSCORE = 0;
 
 int loadHighScore(char *fname){
 	FILE *fp;
-	int tmp;
+	int tmp = 0;
 	
 	HSCORE = 0;
 	
