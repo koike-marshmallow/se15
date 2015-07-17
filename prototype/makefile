@@ -62,7 +62,7 @@ resetScore.o : resetScore.c highScore.h
 #
 #release
 release_dir = ../release
-release : run_savannah.o drawScreen.o highScore.o menuScreen.o matrix.o gameScreen.o game_bump.o game_field.o game_drawScreen.o game_obstacle.o game_jumping.o getCommand.o title.mat player.mat player_lose.mat obs1.mat obs2.mat obs3.mat score
+release : run_savannah.o drawScreen.o highScore.o menuScreen.o matrix.o gameScreen.o game_bump.o game_field.o game_drawScreen.o game_obstacle.o game_jumping.o getCommand.o title.mat player.mat player_lose.mat obs1.mat obs2.mat obs3.mat
 #	フォルダ作成
 	if [ -d $(release_dir) ]; then rm -rf $(release_dir); fi
 	mkdir $(release_dir)
