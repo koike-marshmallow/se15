@@ -95,18 +95,21 @@ int gameScreen(int lv0, int sc0){
 	
 	gdscr_refresh();
 	drawString(6, 40, "Press space key to start", FORMAT_CENTER);
-	while( (inp = getch()) != ' ' );
+	while( 1 ){
+		inp = getch();
+		if( inp == ' ' )break;
+		if( inp == 'q' )break;
+	}
 	
 	timeout(0);
 	setLevel(LEVEL);
-	while( !gbump_check() ){
+	while( !gbump_check() && inp != 'q' ){
 	
 		/*sleep処理*/
 		usleep(DELAY);
 	
 		/*入力受付処理*/
 		inp = getch();
-		if( inp == 'q' ) break;
 		if( inp == ' ' ) gjump_flagSet();
 		
 		/*レベルアップ処理*/
