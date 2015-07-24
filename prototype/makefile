@@ -74,4 +74,5 @@ release : run_savannah.o drawScreen.o highScore.o menuScreen.o matrix.o gameScre
 	cp obs1.mat $(release_dir)/obs1.mat
 	cp obs2.mat $(release_dir)/obs2.mat
 	cp obs3.mat $(release_dir)/obs3.mat
+	cp obs4.mat $(release_dir)/obs4.mat
 

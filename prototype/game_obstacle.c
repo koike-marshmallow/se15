@@ -2,7 +2,7 @@
 #include "matrix.h"
 #include "game_obstacle.h"
 
-#define OBSTACLE_NUM 3
+#define OBSTACLE_NUM 4
 
 #define PUT_PROB_INIT 10
 #define PUT_WAIT_SPAN_INIT 24
@@ -24,6 +24,7 @@ void gobstacle_init(void){
 	OBSTACLES[0] = loadMatrix("obs1.mat");
 	OBSTACLES[1] = loadMatrix("obs2.mat");
 	OBSTACLES[2] = loadMatrix("obs3.mat");
+	OBSTACLES[3] = loadMatrix("obs4.mat");
 	OBSTACLE_RANGE = OBSTACLE_NUM;
 }
 
